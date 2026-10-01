@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { ArrowUpRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 type ProjectGalleryProps = {
@@ -77,11 +77,15 @@ export default function ProjectGallery({ title, pages }: ProjectGalleryProps) {
     }}>
       <div className="portfolio-viewport" ref={viewportRef} onScroll={updateProgress} tabIndex={0}
         onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={endDrag}
+        onContextMenu={(event) => event.preventDefault()} onDragStart={(event) => event.preventDefault()}
         aria-label={`${title}作品集横向浏览，可使用左右方向键切换`}>
         {pages.map((page, index) => (
           <figure className="portfolio-slide" key={page}>
             <img src={imagePath(page)} width="4200" height="1211"
               alt={`${title}作品集第 ${index + 1} 面`} loading={index === 0 ? "eager" : "lazy"} draggable="false" />
+            <div className="portfolio-watermark" aria-hidden="true">
+              {Array.from({ length: 8 }, (_, watermarkIndex) => <span key={watermarkIndex}>王博晨 · orange4186.asia</span>)}
+            </div>
           </figure>
         ))}
       </div>
@@ -105,7 +109,7 @@ export default function ProjectGallery({ title, pages }: ProjectGalleryProps) {
             ))}
           </div>
         </div>
-        <Button asChild variant="portfolio" size="control" className="portfolio-original"><a href={imagePath(pages[current])} target="_blank" rel="noreferrer">查看原图 <span className="label-en" lang="en">Full Size</span><ArrowUpRight aria-hidden="true" /></a></Button>
+        <span className="portfolio-protection"><span>作品展示已加署名水印</span><span lang="en">Watermarked preview</span></span>
         <Button variant="portfolio" size="control-icon" type="button" onClick={() => goTo(current + 1)} aria-label="下一面"><ChevronRight aria-hidden="true" /></Button>
       </div>
     </div>

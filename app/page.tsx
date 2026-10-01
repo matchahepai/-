@@ -388,8 +388,8 @@ export default function Home() {
           <div className="profile-card-copy">
             <h1>王博晨</h1>
             <span className="profile-title">产品设计师 <span className="label-en" lang="en">Product Designer</span></span>
-            <strong className="profile-role"><Quote aria-hidden="true" size={27} fill="currentColor" strokeWidth={0} />我习惯先把问题想明白，再开始动手设计。</strong>
-            <p>从用户研究、交互方案到工业建模和视觉呈现，我希望把复杂的想法整理成清晰、好用，也更容易被理解的方案。</p>
+            <strong className="profile-role"><Quote aria-hidden="true" size={27} fill="currentColor" strokeWidth={0} />先把问题想清楚再开始动手设计。</strong>
+            <p>我关注用户、产品和技术之间的连接。从需求分析到体验设计，从概念构想到方案落地，希望用设计创造更简单且更有效的使用体验。</p>
             <div className="profile-education" aria-label="毕业院校">
               <small>毕业院校</small>
               <div>

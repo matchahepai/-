@@ -21,13 +21,21 @@ test("homepage renders the supplied contact destinations and updated profile", a
     'href="https://www.xiaohongshu.com/user/profile/68412a8c000000001d0080bf"',
     'href="mailto:654676340@qq.com"',
     'href="tel:17720204186"',
-    "硕士 · 2026—2029", "本科 · 2021—2025", "Canva 可画", "擅长的事",
+    "硕士 · 2026—2029", "本科 · 2021—2025", "Canva 可画", "擅长的事", "先把问题想清楚再开始动手设计。", "我关注用户、产品和技术之间的连接。",
   ]) assert.ok(html.includes(value), `Missing ${value}`);
   assert.ok(!html.includes("wangbochen.design"));
   assert.ok(!html.includes("云轴"));
   assert.match(html, /class="[^"]*contact-link[^"]*"[^>]+aria-haspopup="dialog"/);
   assert.match(html, /class="mobile-sheet "[^>]+inert=""/);
   assert.ok(html.includes("<span>微信</span>"));
+});
+
+test("project previews carry attribution and do not expose original-image links", async () => {
+  const html = await render("/work/sugar");
+  assert.ok(html.includes("portfolio-watermark"));
+  assert.ok(html.includes("王博晨 · orange4186.asia"));
+  assert.ok(html.includes("Watermarked preview"));
+  assert.ok(!html.includes("查看原图"));
 });
 
 test("home and project pages share controls and selective bilingual wayfinding", async () => {
@@ -39,7 +47,7 @@ test("home and project pages share controls and selective bilingual wayfinding",
     assert.ok(html.includes("ui-arrow"));
   }
   for (const text of ["Selected Work", "Let’s Connect", "Product Designer", "category-badge"]) assert.ok(home.includes(text));
-  for (const text of ["Project Overview", "Full Size", "All Work", "tone-blue", "project-facts"]) assert.ok(detail.includes(text));
+  for (const text of ["Project Overview", "Watermarked preview", "All Work", "tone-blue", "project-facts"]) assert.ok(detail.includes(text));
   assert.ok(detail.includes('aria-current="page"'));
 });
 
